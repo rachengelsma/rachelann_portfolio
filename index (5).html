@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rachelann Engelsma — Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0c0f'/><text y='52' x='50' font-size='28' font-family='monospace' font-weight='bold' fill='%2300e5a0' text-anchor='middle'>RE</text><text y='82' x='50' font-size='30' fill='%23f5a623' text-anchor='middle'>𝄞</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:        #0a0c0f;
+  --bg2:       #0f1217;
+  --bg3:       #151a22;
+  --border:    #1e2530;
+  --border2:   #2a3445;
+  --green:     #00e5a0;
+  --green2:    #00b87c;
+  --green-dim: #003d2a;
+  --blue:      #4d9fff;
+  --blue-dim:  #0d2a50;
+  --amber:     #f5a623;
+  --amber-dim: #3d2800;
+  --text:      #e8edf5;
+  --text2:     #8899aa;
+  --text3:     #4a5568;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--mono); overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+  pointer-events: none; z-index: 9999;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 52px;
+  background: rgba(10,12,15,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-left { display: flex; align-items: center; gap: 1.5rem; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.nav-id { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--text); }
+.nav-id span { color: var(--green); }
+nav ul { list-style: none; display: flex; }
+nav li { border-left: 1px solid var(--border); }
+nav a { display: block; padding: 0 1.1rem; line-height: 52px; text-decoration: none; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); transition: color 0.15s, background 0.15s; }
+nav a:hover { color: var(--green); background: rgba(0,229,160,0.04); }
+
+/* ── LAYOUT ── */
+.section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+
+/* ── HERO ── */
+#hero { min-height: 100vh; display: flex; align-items: center; padding: 52px 2.5rem 0; position: relative; overflow: hidden; }
+.wave-bg { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; display: flex; align-items: flex-end; gap: 2px; padding: 0 2rem; opacity: 0.07; pointer-events: none; }
+.wave-bar { flex: 1; background: var(--green); border-radius: 1px 1px 0 0; animation: wave var(--dur,1.2s) ease-in-out infinite alternate; animation-delay: var(--del,0s); }
+@keyframes wave { from{height:var(--min,10px)} to{height:var(--max,80px)} }
+.hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: center; }
+.hero-file-path { font-size: 0.72rem; color: var(--text3); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.4rem; }
+.hero-file-path .sep { color: var(--border2); }
+.hero-file-path .active { color: var(--amber); }
+.hero-comment { font-size: 0.85rem; color: var(--text3); font-style: italic; margin-bottom: 0.5rem; line-height: 1.6; }
+h1 { font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 600; line-height: 1.0; letter-spacing: -0.02em; margin: 0.75rem 0 1.25rem; }
+h1 .name { color: var(--text); display: block; }
+h1 .role-line { display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; }
+h1 .swe { color: var(--blue); }
+h1 .amp { color: var(--text3); font-weight: 300; font-size: 0.7em; }
+h1 .mus { color: var(--green); }
+.hero-tagline { font-family: var(--sans); font-size: 1rem; font-weight: 300; font-style: italic; color: var(--text2); line-height: 1.7; max-width: 520px; margin-bottom: 2rem; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.7rem 1.4rem; border-radius: 2px; text-decoration: none; transition: all 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+.btn-primary { background: var(--green); color: #000; border: 1px solid var(--green); }
+.btn-primary:hover { background: var(--green2); border-color: var(--green2); }
+.btn-outline { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ── TERMINAL CARD ── */
+.hero-terminal { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.terminal-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1rem; background: var(--bg3); border-bottom: 1px solid var(--border); }
+.t-dot { width: 10px; height: 10px; border-radius: 50%; }
+.t-dot.r{background:#ff5f56} .t-dot.y{background:#ffbd2e} .t-dot.g{background:#27c93f}
+.t-title { font-size: 0.68rem; color: var(--text3); margin-left: auto; letter-spacing: 0.1em; }
+.terminal-body { padding: 1.25rem 1.5rem; }
+.t-line { font-size: 0.8rem; line-height: 1.9; }
+.t-prompt{color:var(--green)} .t-cmd{color:var(--text)} .t-key{color:var(--blue)} .t-val{color:var(--amber)} .t-str{color:var(--green)} .t-cmt{color:var(--text3);font-style:italic}
+.t-cursor { display:inline-block; width:8px; height:1em; background:var(--green); vertical-align:text-bottom; animation:blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── SECTION HEADERS ── */
+.sec-label { display: flex; align-items: center; gap: 1rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); margin-bottom: 2.5rem; }
+.sec-label::before { content: ''; flex: 0 0 24px; height: 1px; background: var(--border2); }
+.sec-label .num { color: var(--green); }
+h2 { font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+h2 .accent { color: var(--green); font-weight: 600; }
+h2 .dim { color: var(--text3); }
+
+/* ── ABOUT ── */
+#about { padding: 8rem 2.5rem; border-top: 1px solid var(--border); }
+.about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; }
+.about-text p { font-family: var(--sans); font-size: 1rem; font-weight: 300; color: var(--text2); line-height: 1.85; margin-bottom: 1rem; }
+.stack-section { margin-top: 2.5rem; }
+.stack-title { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); margin-bottom: 1rem; }
+.stack-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2px; }
+.tag-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
+.tag-blue  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(77,159,255,0.2); }
+.tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.2); }
+
+/* ── STATS PANEL ── */
+.stats-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.stats-header { padding: 0.75rem 1.25rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); display: flex; align-items: center; gap: 0.5rem; }
+.stats-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { font-size: 0.78rem; color: var(--text2); }
+.stat-value { font-size: 0.78rem; font-weight: 600; color: var(--green); }
+.mini-bar-wrap { padding: 0 1.25rem 1.25rem; }
+.mini-bar-label { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text3); margin-bottom: 0.4rem; }
+.mini-bar-track { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 0.75rem; }
+.mini-bar-fill { height: 100%; border-radius: 2px; animation: grow 1.2s ease-out both; animation-delay: 0.3s; }
+@keyframes grow { from{width:0} }
+.fill-green{background:var(--green)} .fill-blue{background:var(--blue)} .fill-amber{background:var(--amber)}
+
+/* ── ENSEMBLES ── */
+#ensembles { padding: 8rem 2.5rem; background: var(--bg2); border-top: 1px solid var(--border); }
+.ens-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-top: 3rem; }
+.ens-card { background: var(--bg2); padding: 2rem 1.75rem; position: relative; overflow: hidden; transition: background 0.2s; }
+.ens-card:hover { background: var(--bg3); }
+.ens-card::before { content: var(--icon,'♩'); position: absolute; top: 1rem; right: 1.5rem; font-size: 4rem; color: var(--green); opacity: 0.04; pointer-events: none; transition: opacity 0.2s; }
+.ens-card:hover::before { opacity: 0.08; }
+.ens-index { font-size: 0.65rem; color: var(--text3); letter-spacing: 0.2em; margin-bottom: 1.25rem; }
+.ens-tag { display: inline-flex; align-items: center; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.22rem 0.55rem; border-radius: 2px; margin-bottom: 1rem; }
+.ens-name { font-family: var(--sans); font-size: 1.05rem; font-weight: 400; color: var(--text); line-height: 1.4; margin-bottom: 0.5rem; }
+.ens-meta { font-size: 0.7rem; color: var(--text3); letter-spacing: 0.1em; margin-bottom: 1rem; }
+.ens-desc { font-family: var(--sans); font-size: 0.88rem; font-weight: 300; color: var(--text2); line-height: 1.7; }
+
+/* ── REPERTOIRE ── */
+#repertoire { padding: 8rem 2.5rem; border-top: 1px solid var(--border); }
+.rep-table { width: 100%; border-collapse: collapse; margin-top: 3rem; }
+.rep-table thead tr { border-bottom: 1px solid var(--border2); }
+.rep-table th { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); text-align: left; padding: 0 1rem 0.75rem 0; }
+.rep-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+.rep-table tbody tr:hover { background: rgba(0,229,160,0.02); }
+.rep-table td { padding: 0.85rem 1rem 0.85rem 0; font-family: var(--sans); font-size: 0.88rem; font-weight: 300; color: var(--text2); vertical-align: middle; }
+.rep-table td.idx { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); white-space: nowrap; }
+.rep-table td.title { color: var(--text); font-style: italic; }
+.rep-table td.composer { color: var(--text2); }
+.rep-table td.sem { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); white-space: nowrap; }
+.epoch-badge { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 2px; white-space: nowrap; }
+
+/* ── VIDEOS ── */
+#videos { padding: 8rem 2.5rem; background: var(--bg2); border-top: 1px solid var(--border); }
+.vid-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.vid-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
+.vid-card:hover { border-color: var(--border2); }
+.vid-thumb { width: 100%; aspect-ratio: 16/9; background: var(--bg); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer; }
+.vid-side .vid-thumb { aspect-ratio: 16/8; }
+svg.scope { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.12; }
+.play-ring { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--green); display: flex; align-items: center; justify-content: center; z-index: 1; transition: background 0.2s, transform 0.2s; }
+.vid-thumb:hover .play-ring { background: rgba(0,229,160,0.12); transform: scale(1.08); }
+.play-ring svg { width: 18px; height: 18px; fill: var(--green); margin-left: 3px; }
+.play-ring.sm { width: 40px; height: 40px; }
+.play-ring.sm svg { width: 14px; height: 14px; }
+.vid-duration { position: absolute; bottom: 0.6rem; right: 0.75rem; font-size: 0.65rem; font-weight: 600; color: var(--text); letter-spacing: 0.08em; background: rgba(0,0,0,0.7); padding: 0.15rem 0.4rem; border-radius: 2px; }
+.vid-info { padding: 1rem 1.25rem; }
+.vid-title { font-family: var(--sans); font-size: 1rem; font-style: italic; font-weight: 300; color: var(--text); margin-bottom: 0.3rem; }
+.vid-meta { font-size: 0.68rem; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; }
+.vid-embed { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--bg); }
+.vid-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.vid-embed-sm { aspect-ratio: 16/8; }
+.vid-side { display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* ── CONTACT ── */
+#contact { padding: 8rem 2.5rem; border-top: 1px solid var(--border); }
+.contact-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 2rem; }
+.contact-text { font-family: var(--sans); font-size: 1.05rem; font-weight: 300; font-style: italic; color: var(--text2); line-height: 1.8; max-width: 580px; }
+.contact-email-btn {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+  background: transparent; color: var(--green);
+  border: 1px solid var(--green); border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.contact-email-btn:hover { background: rgba(0,229,160,0.08); }
+.contact-email-btn .arrow { font-size: 1rem; }
+.contact-socials { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+.social-link { display: block; padding: 0.6rem 1.1rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); text-decoration: none; border-right: 1px solid var(--border); transition: color 0.15s, background 0.15s; }
+.social-link:last-child { border-right: none; }
+.social-link:hover { color: var(--blue); background: rgba(77,159,255,0.05); }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--border); padding: 1.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between; }
+.footer-left { font-size: 0.65rem; color: var(--text3); letter-spacing: 0.12em; }
+.footer-left span { color: var(--green); }
+.footer-right { font-size: 0.65rem; color: var(--text3); font-style: italic; letter-spacing: 0.08em; }
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: flex; flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px; cursor: pointer; padding: 6px;
+  background: transparent; border: 1px solid var(--border2); border-radius: 2px;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+.hamburger:hover { border-color: var(--green); }
+.hamburger span { display: block; height: 1px; background: var(--text2); transition: all 0.25s; }
+.hamburger:hover span { background: var(--green); }
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ── DRAWER ── */
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity 0.25s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer {
+  position: fixed; top: 0; right: -360px; bottom: 0; z-index: 900;
+  width: 320px; background: var(--bg2);
+  border-left: 1px solid var(--border);
+  transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column;
+}
+.drawer.open { right: 0; }
+.drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem; height: 52px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3);
+}
+.drawer-close {
+  width: 28px; height: 28px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text3); font-size: 1.2rem; transition: color 0.15s;
+  background: none; border: none;
+}
+.drawer-close:hover { color: var(--green); }
+.drawer-section { padding: 1.5rem; border-bottom: 1px solid var(--border); }
+.drawer-section-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.75rem; }
+.drawer-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 0; text-decoration: none;
+  font-size: 0.82rem; font-weight: 400; letter-spacing: 0.06em;
+  color: var(--text2); border-bottom: 1px solid var(--border);
+  transition: color 0.15s, padding-left 0.15s;
+}
+.drawer-link:last-child { border-bottom: none; }
+.drawer-link:hover { color: var(--green); padding-left: 0.5rem; }
+.drawer-link .dl-arrow { font-size: 0.75rem; color: var(--text3); transition: color 0.15s; }
+.drawer-link:hover .dl-arrow { color: var(--green); }
+.drawer-resume {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin: 1.5rem; padding: 0.75rem 1rem;
+  background: var(--green-dim); border: 1px solid rgba(0,229,160,0.2); border-radius: 2px;
+  text-decoration: none; color: var(--green);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: background 0.15s;
+}
+.drawer-resume:hover { background: rgba(0,229,160,0.12); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-terminal { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .ens-grid { grid-template-columns: 1fr; }
+  .vid-grid { grid-template-columns: 1fr; }
+  nav ul { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-dot"></div>
+    <span class="nav-id"><span>~</span>/rachelann</span>
+  </div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#ensembles">Ensembles</a></li>
+    <li><a href="#repertoire">Repertoire</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#music-education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span>Pages</span>
+    <button class="drawer-close" id="drawerClose">✕</button>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">This page</div>
+    <a class="drawer-link" href="index.html">Portfolio <span class="dl-arrow">→</span></a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">More</div>
+    <a class="drawer-link" href="music-education.html">Music Education <span class="dl-arrow">→</span></a>
+    <a class="drawer-link" href="experience.html">Experience <span class="dl-arrow">→</span></a>
+    <a class="drawer-link" href="projects.html">Projects <span class="dl-arrow">→</span></a>
+    
+    <a class="drawer-link" href="volunteering.html">Volunteering <span class="dl-arrow">→</span></a>
+    
+  </div>
+  <a class="drawer-resume" href="Engelsma_Resume.pdf" target="_blank">↓ Download Resume</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wave-bg" id="wavebg"></div>
+  <div class="hero-inner section-wrap">
+    <div class="hero-left">
+      <div class="hero-file-path">
+        <span>rachelann</span><span class="sep">/</span>
+        <span class="active">portfolio</span>
+      </div>
+      <p class="hero-comment">// software engineer + classical vocalist</p>
+      <h1>
+        <span class="name">Rachelann Engelsma</span>
+        <span class="role-line">
+          <span class="swe">SWE</span>
+          <span class="amp">×</span>
+          <span class="mus">Musician</span>
+        </span>
+      </h1>
+      <p class="hero-tagline">Building systems by day, interpreting score by night. Two languages — one for machines, one for meaning.</p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#ensembles">View Ensembles</a>
+        <a class="btn btn-outline" href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <!-- TERMINAL -->
+    <div class="hero-terminal">
+      <div class="terminal-bar">
+        <span class="t-dot r"></span><span class="t-dot y"></span><span class="t-dot g"></span>
+        <span class="t-title">profile.json</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-cmd">{</span></div>
+        <div class="t-line" style="padding-left:1.2rem"><span class="t-key">"name"</span><span class="t-cmd">: </span><span class="t-str">"Rachelann Engelsma"</span><span class="t-cmd">,</span></div>
+        <div class="t-line" style="padding-left:1.2rem"><span class="t-key">"major"</span><span class="t-cmd">: </span><span class="t-str">"Software Engineering"</span><span class="t-cmd">,</span></div>
+        <div class="t-line" style="padding-left:1.2rem"><span class="t-key">"minor"</span><span class="t-cmd">: </span><span class="t-str">"Music"</span><span class="t-cmd">,</span></div>
+        <div class="t-line" style="padding-left:1.2rem"><span class="t-key">"stack"</span><span class="t-cmd">: [</span><span class="t-str">"Python"</span><span class="t-cmd">, </span><span class="t-str">"C"</span><span class="t-cmd">, </span><span class="t-str">"HTML"</span><span class="t-cmd">],</span></div>
+        <div class="t-line" style="padding-left:1.2rem"><span class="t-key">"repertoire"</span><span class="t-cmd">: </span><span class="t-val">6</span><span class="t-cmd">,</span></div>
+        <div class="t-line" style="padding-left:1.2rem"><span class="t-key">"available"</span><span class="t-cmd">: </span><span class="t-val">true</span></div>
+        <div class="t-line"><span class="t-cmd">}</span></div>
+        <div class="t-line" style="margin-top:0.75rem"><span class="t-prompt">$</span> <span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="sec-label"><span class="num">01</span> About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Behind the <span class="accent">code</span> <span class="dim">&amp; score</span></h2>
+        <br>
+        <p>I'm Rachelann — a Software Engineering student at Grand Valley State University with a focus in Intelligent Systems, and a genuine love for two very different kinds of systems: the ones you build in code, and the ones composers spent centuries perfecting on the page.</p>
+        <p>I started playing piano at five years old, long before I ever wrote a line of code. Music has always been the constant — through theory classes, ensemble rehearsals, and competition stages. I began formal voice training in August 2025 after auditioning at GVSU, proving it's never too late to add a new language to your stack. Outside the classroom, I serve on the Dean's Student Advisory Council, mentor and tutor incoming freshmen, and work as an IT Intern.</p>
+        <p>I believe in exploring boldly and failing loudly. Whether I'm debugging a program or preparing a Baroque aria, I'm drawn to the same thing: understanding why something works the way it does, and then making it better.</p>
+
+        <div class="stack-section">
+          <p class="stack-title">Tech stack</p>
+          <div class="stack-grid">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-blue">C</span>
+            <span class="tag tag-blue">HTML</span>
+            <span class="tag tag-blue">CSS</span>
+            <span class="tag tag-blue">Linux</span>
+            <span class="tag tag-blue">Git</span>
+          </div>
+        </div>
+        <div class="stack-section">
+          <p class="stack-title">Musical skills</p>
+          <div class="stack-grid">
+            <span class="tag tag-green">Voice</span>
+            <span class="tag tag-green">Piano</span>
+            <span class="tag tag-green">Music Theory</span>
+            <span class="tag tag-green">Violin</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div>
+        <div class="stats-panel">
+          <div class="stats-header"><div class="dot"></div>overview.json</div>
+          <div class="stat-row"><span class="stat-label">University</span><span class="stat-value">Grand Valley State</span></div>
+          <div class="stat-row"><span class="stat-label">Class Year</span><span class="stat-value">2028</span></div>
+          <div class="stat-row"><span class="stat-label">Major</span><span class="stat-value">SWE · Intelligent Systems</span></div>
+          <div class="stat-row"><span class="stat-label">Minor</span><span class="stat-value">Music</span></div>
+          <div class="stat-row"><span class="stat-label">Active ensembles</span><span class="stat-value">3</span></div>
+          <div class="stat-row"><span class="stat-label">Repertoire pieces</span><span class="stat-value">6</span></div>
+          <div class="mini-bar-wrap">
+            <div class="mini-bar-label"><span>Engineering</span><span>compiled successfully</span></div>
+            <div class="mini-bar-track"><div class="mini-bar-fill fill-blue" style="width:100%"></div></div>
+            <div class="mini-bar-label"><span>Music</span><span>building...</span></div>
+            <div class="mini-bar-track"><div class="mini-bar-fill fill-green" style="width:65%"></div></div>
+            <div class="mini-bar-label"><span>Both at once</span><span>no conflicts</span></div>
+            <div class="mini-bar-track"><div class="mini-bar-fill fill-amber" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENSEMBLES -->
+<section id="ensembles">
+  <div class="section-wrap">
+    <div class="sec-label"><span class="num">02</span> Ensembles</div>
+    <h2>Where I <span class="accent">sing</span></h2>
+    <div class="ens-grid">
+
+      <div class="ens-card" style="--icon:'𝄞'" onclick="window.open('https://calvin.edu/academics/school-humanities-arts-and-social-sciences/music/ensembles/oratorio-chorus','_blank')" style="cursor:pointer;">
+        <div class="ens-index">ensemble_001</div>
+        <div class="ens-tag tag-green">Oratorio · Calvin University</div>
+        <p class="ens-name">Calvin Oratorio Society <span style="font-size:0.65rem;color:var(--text3);margin-left:0.4rem;">↗</span></p>
+        <p class="ens-meta">Grand Rapids, MI · Dr. Mark Stover, conductor</p>
+        <p class="ens-desc">A large community chorus open to Calvin students, alumni, and community members. Performs Handel's <em>Messiah</em> each December — a tradition now over 106 years running.</p>
+      </div>
+
+      <div class="ens-card" style="--icon:'♩'" onclick="window.open('https://www.gvsu.edu/mtd/choral-ensembles-42.htm','_blank')" style="cursor:pointer;">
+        <div class="ens-index">ensemble_002</div>
+        <div class="ens-tag tag-blue">Vocal Ensemble · GVSU</div>
+        <p class="ens-name">Anima Vocal Ensemble <span style="font-size:0.65rem;color:var(--text3);margin-left:0.4rem;">↗</span></p>
+        <p class="ens-meta">Grand Valley State University · Dr. Charles Norris, conductor</p>
+        <p class="ens-desc">GVSU's vocal ensemble within the Department of Music, Theatre, and Dance. Performs a broad choral repertoire alongside the University Arts Chorale, from classical choral works to contemporary pieces.</p>
+      </div>
+
+      <div class="ens-card" style="--icon:'♪'">
+        <div class="ens-index">ensemble_003</div>
+        <div class="ens-tag tag-amber">Church Choir</div>
+        <p class="ens-name">Heritage Voices</p>
+        <p class="ens-meta">Church Choir · Weekly rehearsals · Two concerts annually</p>
+        <p class="ens-desc">A welcoming church choir that draws singers from across the community. Rehearses weekly and performs two concerts each year.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REPERTOIRE -->
+<section id="repertoire">
+  <div class="section-wrap">
+    <div class="sec-label"><span class="num">03</span> Repertoire</div>
+    <h2>Works <span class="accent">studied</span> <span class="dim">&amp; performed</span></h2>
+    <table class="rep-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Composer</th>
+          <th>Type</th>
+          <th>Term</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="idx">001</td>
+          <td class="title">Dolce scherzar</td>
+          <td>Giacomo Antonio Perti <span style="color:var(--text3);font-size:0.78rem;">(1661–1756)</span></td>
+          <td class="type-cell"><span class="epoch-badge tag-amber">Art Song</span></td>
+          <td class="sem">Fall 2025</td>
+        </tr>
+        <tr>
+          <td class="idx">002</td>
+          <td class="title">Come Thou Fount of Every Blessing</td>
+          <td>Robert Robinson / arr. Rich Walters <span style="color:var(--text3);font-size:0.78rem;">(1770–1858)</span></td>
+          <td class="type-cell"><span class="epoch-badge tag-green">Hymn</span></td>
+          <td class="sem">Fall 2025</td>
+        </tr>
+        <tr>
+          <td class="idx">003</td>
+          <td class="title">The Porcupine</td>
+          <td>A. Walter Kramer / text: Burgess Johnson <span style="color:var(--text3);font-size:0.78rem;">(1890–1969)</span></td>
+          <td class="type-cell"><span class="epoch-badge tag-amber">Art Song</span></td>
+          <td class="sem">Fall 2025</td>
+        </tr>
+        <tr>
+          <td class="idx">004</td>
+          <td class="title">O cessate di piagarmi</td>
+          <td>Alessandro Scarlatti / lib: Nicola Minato <span style="color:var(--text3);font-size:0.78rem;">(1660–1725)</span></td>
+          <td class="type-cell"><span class="epoch-badge tag-blue">Aria</span></td>
+          <td class="sem">Winter 2026</td>
+        </tr>
+        <tr>
+          <td class="idx">005</td>
+          <td class="title">When I Have Heard Young Maids Complaining</td>
+          <td>Henry Purcell / lib: Elkanah Settle <span style="color:var(--text3);font-size:0.78rem;">(1659–1695)</span></td>
+          <td class="type-cell"><span class="epoch-badge tag-blue">Aria</span></td>
+          <td class="sem">Winter 2026</td>
+        </tr>
+        <tr>
+          <td class="idx">006</td>
+          <td class="title">This Little Rose</td>
+          <td>William Roy / text: Emily Dickinson <span style="color:var(--text3);font-size:0.78rem;">(1949–present)</span></td>
+          <td class="type-cell"><span class="epoch-badge tag-amber">Art Song</span></td>
+          <td class="sem">Winter 2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-wrap">
+    <div class="sec-label"><span class="num">04</span> Videos</div>
+    <h2>Watch <span class="accent">performances</span></h2>
+    <div class="vid-grid">
+      <div class="vid-card">
+        <div class="vid-embed">
+          <iframe src="https://www.youtube.com/embed/1vGa8WeVvrc" title="GVSU Choirs Concert 2, Fall 2025" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="vid-info">
+          <p class="vid-title">GVSU Choirs Concert 2</p>
+          <p class="vid-meta">Anima Vocal Ensemble · Fall 2025</p>
+        </div>
+      </div>
+      <div class="vid-side">
+        <div class="vid-card">
+          <div class="vid-embed vid-embed-sm">
+            <iframe src="https://www.youtube.com/embed/XFDRlj2l5s4" title="GVSU Opera Scenes and Choruses" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="vid-info">
+            <p class="vid-title">GVSU Opera Scenes and Choruses</p>
+            <p class="vid-meta">Anima Vocal Ensemble · 2025–26</p>
+          </div>
+        </div>
+        <div class="vid-card">
+          <div class="vid-embed vid-embed-sm">
+            <iframe src="https://www.youtube.com/embed/NEneIJejfWE" title="GVSU Anima Vocal Ensemble and Varsity Glee Club Spring Concert 2026" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="vid-info">
+            <p class="vid-title">Anima &amp; Varsity Glee Club — Spring Concert</p>
+            <p class="vid-meta">Anima Vocal Ensemble · Spring 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem; font-size:0.72rem; color:var(--text3); font-style:italic;">
+      // All performances with Anima Vocal Ensemble · GVSU Dept. of Music, Theatre, and Dance
+    </p>
+  </div>
+</section>
+
+<!-- MUSIC EDUCATION -->
+<section id="music-education">
+  <div class="section-wrap">
+    <div class="sec-label"><span class="num">05</span> Music Education</div>
+    <h2 style="font-size:clamp(1.4rem,2.5vw,2rem); letter-spacing:0.04em; font-weight:300;">commit history: <span class="accent">music</span></h2>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden; margin-top:2.5rem;">
+
+      <div style="background:var(--bg2); padding:1.5rem;">
+        <p style="font-size:0.62rem;color:var(--text3);letter-spacing:0.2em;margin-bottom:0.75rem;">voice</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:0.3rem;">Dr. Kathryn Stieler</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:0.3rem;">Emily Scott</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);">Dr. Andrew Lenhart</p>
+      </div>
+
+      <div style="background:var(--bg2); padding:1.5rem; border-left:1px solid var(--border); border-right:1px solid var(--border);">
+        <p style="font-size:0.62rem;color:var(--text3);letter-spacing:0.2em;margin-bottom:0.75rem;">piano</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:0.3rem;">Amy Johnson</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:0.3rem;">Marie Vandenberg</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:0.3rem;">Mei Lin Wooden</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);">Dr. Helen Marlais</p>
+      </div>
+
+      <div style="background:var(--bg2); padding:1.5rem;">
+        <p style="font-size:0.62rem;color:var(--text3);letter-spacing:0.2em;margin-bottom:0.75rem;">violin</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:0.3rem;">Leanne King</p>
+        <p style="font-family:var(--sans);font-size:0.95rem;font-style:italic;color:var(--text);">Lucy Spinner</p>
+      </div>
+
+    </div>
+
+    <a href="music-education.html" style="display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;padding:1.25rem 1.75rem;background:var(--bg2);border:1px solid var(--border2);border-radius:4px;text-decoration:none;transition:border-color 0.15s,background 0.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.background='var(--bg3)'" onmouseout="this.style.borderColor='var(--border2)';this.style.background='var(--bg2)'">
+      <div>
+        <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text2);margin-bottom:0.3rem;">Full music education history</p>
+        <p style="font-family:var(--sans);font-size:0.88rem;font-weight:300;font-style:italic;color:var(--text3);">Years of commits. Still compiling.</p>
+      </div>
+      <span style="font-size:1.2rem;color:var(--green);">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="sec-label"><span class="num">06</span> Contact</div>
+    <h2>Say <span class="accent">hello</span></h2>
+    <div class="contact-inner">
+      <p class="contact-text">Open to connecting with fellow musicians and engineers. Reach out anytime.</p>
+      <a class="contact-email-btn" href="mailto:rachengelsma@gmail.com">
+        <span>✉</span>
+        <span>rachengelsma@gmail.com</span>
+        <span class="arrow">→</span>
+      </a>
+      <div class="contact-socials">
+        <a class="social-link" href="https://www.linkedin.com/in/rachelann-engelsma-23061438a" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left"><span>~/rachelann</span> · GVSU SWE · Music Minor · Class of 2028</span>
+  <span class="footer-right">built with HTML + CSS · hosted on GitHub Pages</span>
+</footer>
+
+<script>
+// animated waveform
+const wave = document.getElementById('wavebg');
+for (let i = 0; i < 120; i++) {
+  const bar = document.createElement('div');
+  bar.className = 'wave-bar';
+  const min = 4 + Math.random() * 20;
+  const max = min + 20 + Math.random() * 80;
+  bar.style.setProperty('--min', min + 'px');
+  bar.style.setProperty('--max', max + 'px');
+  bar.style.setProperty('--dur', (0.8 + Math.random() * 1.4).toFixed(2) + 's');
+  bar.style.setProperty('--del', (Math.random() * 1.2).toFixed(2) + 's');
+  wave.appendChild(bar);
+}
+
+// hamburger drawer
+const hamburger = document.getElementById('hamburger');
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('drawerOverlay');
+const drawerClose = document.getElementById('drawerClose');
+
+function openDrawer() {
+  drawer.classList.add('open');
+  overlay.classList.add('open');
+  hamburger.classList.add('open');
+}
+function closeDrawer() {
+  drawer.classList.remove('open');
+  overlay.classList.remove('open');
+  hamburger.classList.remove('open');
+}
+hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+drawerClose.addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+</script>
+</body>
+</html>
